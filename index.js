@@ -1,5 +1,4 @@
-createAutoComplete({
-    root: document.querySelector('.autocomplete'),
+const autoCompleteConfig = {
     renderOption(movie){
         const imgSrc = movie.Poster === 'N/A' ? '' : movie.Poster;
         return `
@@ -14,19 +13,28 @@ createAutoComplete({
         return movie.Title
     },
     async fetchData(searchTerm) { 
-    const response = await axios.get('http://www.omdbapi.com/', {
-        params: {
-            apikey: '30da1ff6',
-            s: searchTerm
-        }
-    });
+        const response = await axios.get('http://www.omdbapi.com/', {
+            params: {
+                apikey: '30da1ff6',
+                s: searchTerm
+            }
+        });
 
-    if (response.data.Error){
-        return [];
+        if (response.data.Error){
+            return [];
     }
 
-    return response.data.Search;
-}
+        return response.data.Search;
+    }
+};
+
+createAutoComplete({
+    ...autoCompleteConfig,
+    root: document.querySelector('.#left-autocomplete'),
+});
+createAutoComplete({
+    ...autoCompleteConfig,
+    root: document.querySelector('.#right-autocomplete'),
 });
 
 const onMovieSelect = async movie => {
