@@ -7,6 +7,7 @@ const autoCompleteConfig = {
     `;
     },
     onOptionSelect(movie){
+        document.querySelector('.tutorial').classList.add('is-hidden');
         onMovieSelect(movie);
     },
     inputValue(movie){
@@ -30,11 +31,11 @@ const autoCompleteConfig = {
 
 createAutoComplete({
     ...autoCompleteConfig,
-    root: document.querySelector('.#left-autocomplete'),
+    root: document.querySelector('#left-autocomplete'),
 });
 createAutoComplete({
     ...autoCompleteConfig,
-    root: document.querySelector('.#right-autocomplete'),
+    root: document.querySelector('#right-autocomplete'),
 });
 
 const onMovieSelect = async movie => {
